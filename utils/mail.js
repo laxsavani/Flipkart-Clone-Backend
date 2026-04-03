@@ -471,3 +471,103 @@ exports.forgotPasswordMailForUser = async (toName, toMail, resetLink) => {
     `,
   });
 };
+
+exports.sendOtpMail = async (toName, toMail, otp) => {
+  return transporter.sendMail({
+    from: `"MarketPro Ecommerce" <${process.env.EMAIL_USER}>`,
+    to: toMail,
+    subject: 'Your Password Reset OTP - MarketPro Ecommerce',
+    html: `
+      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>🔐 Password Reset OTP</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f8fafc;padding:20px 10px;min-width:320px;font-family:'Segoe UI',Arial,sans-serif;">
+    
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;max-width:500px;margin:0 auto;">
+        <tr>
+            <td align="center">
+                
+                <!-- Simple Clean Card -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background:#ffffff;border-radius:16px;border:1px solid #e5e7eb;box-shadow:0 10px 30px rgba(0,0,0,0.1);">
+                    
+                    <tr>
+                        <td align="center" style="padding:40px 25px;">
+                            
+                            <!-- Simple Icon -->
+                            <table border="0" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+                                <tr>
+                                    <td align="center" style="background:#6366f1;width:70px;height:70px;border-radius:35px;color:#ffffff;font-size:32px;font-weight:bold;">
+                                        🔐
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Simple Title -->
+                            <h1 style="color:#111827;font-size:24px;font-weight:700;margin:0 0 10px 0;text-align:center;">
+                                Your Password Reset OTP
+                            </h1>
+                            
+                            <!-- Greeting -->
+                            <p style="color:#6b7280;font-size:15px;margin:0 0 25px 0;text-align:center;line-height:1.5;">
+                                Hi <strong>${toName}</strong>,<br>use this code to reset your password.
+                            </p>
+
+                            <!-- OTP Display -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background:#f3f4f6;border-radius:12px;margin-bottom:20px;">
+                                <tr>
+                                    <td align="center" style="padding:25px 20px;">
+                                        <p style="color:#6b7280;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px 0;">Your OTP</p>
+                                        <p style="color:#111827;font-size:40px;font-weight:800;letter-spacing:12px;margin:0;font-family:'Courier New',monospace;">${otp}</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Expiry -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background:#fef3c7;border:1px solid #f59e0b;border-radius:8px;margin-bottom:15px;">
+                                <tr>
+                                    <td style="padding:12px 16px;text-align:center;">
+                                        <p style="color:#92400e;font-size:14px;font-weight:600;margin:0;">
+                                            ⏱️ Expires in <strong>10 minutes</strong>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Security -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background:#f0fdf4;border:1px solid #10b981;border-radius:8px;">
+                                <tr>
+                                    <td style="padding:12px 16px;text-align:center;">
+                                        <p style="color:#166534;font-size:13px;margin:0;">
+                                            ✅ <strong>Didn't request?</strong> Ignore safely.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                    
+                    <!-- Simple Footer -->
+                    <tr>
+                        <td style="background:#f9fafb;padding:20px 25px;border-top:1px solid #e5e7eb;text-align:center;">
+                            <p style="color:#6b7280;font-size:13px;margin:0;">
+                                <strong style="color:#6366f1;">MarketPro</strong> - Automated email
+                            </p>
+                        </td>
+                    </tr>
+                    
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
+    `,
+  });
+};

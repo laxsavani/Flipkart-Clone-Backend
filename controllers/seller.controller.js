@@ -1,8 +1,8 @@
 require('dotenv').config();
-const { Seller, SubCategory, Product, Order } = require('../models');
+const { Seller, SubCategory, Product, Order, Otp } = require('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { registerMailForSeller, forgotPasswordMailForSeller } = require('../utils/mail');
+const { registerMailForSeller, sendOtpMail } = require('../utils/mail');
 const cloudinary = require('../config/cloudinary');
 
 exports.register = async (req, res) => {
@@ -279,50 +279,62 @@ exports.forgotPassword = async (req, res) => {
       return res.status(404).json({ message: "No seller account found with this email" });
     }
 
-    const resetToken = jwt.sign(
-      { id: seller.id, email: seller.email, type: 'seller-reset' },
-      process.env.JWT_SECRET,
-      { expiresIn: '15m' }
-    );
+    // Generate 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes from now
 
-    const resetLink = `${process.env.FRONTEND_URL || 'http://localhost:5000'}/seller/reset-password?token=${resetToken}`;
+    // Delete any existing unused OTPs for this email
+    await Otp.destroy({ where: { email, type: 'seller', used: false } });
 
-    await forgotPasswordMailForSeller(seller.name, seller.email, resetLink);
+    // Save new OTP in DB
+    await Otp.create({ email, otp, type: 'seller', expiresAt });
+
+    // Send OTP via email
+    await sendOtpMail(seller.name, seller.email, otp);
 
     res.status(200).json({
-      message: "Password reset link sent to your email. It is valid for 15 minutes."
+      message: "OTP sent to your email. It is valid for 10 minutes."
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-exports.resetPassword = async (req, res) => {
+exports.verifyOtpAndReset = async (req, res) => {
   try {
-    const { token, newPassword } = req.body;
+    const { email, otp, newPassword } = req.body;
 
-    if (!token || !newPassword) {
-      return res.status(400).json({ message: "Token and new password are required" });
+    if (!email || !otp || !newPassword) {
+      return res.status(400).json({ message: "Email, OTP, and new password are required" });
     }
 
-    let decoded;
-    try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET);
-    } catch (err) {
-      return res.status(401).json({ message: "Invalid or expired reset token" });
+    // Find OTP record
+    const otpRecord = await Otp.findOne({
+      where: { email, otp, type: 'seller', used: false }
+    });
+
+    if (!otpRecord) {
+      return res.status(400).json({ message: "Invalid OTP. Please request a new one." });
     }
 
-    if (decoded.type !== 'seller-reset') {
-      return res.status(401).json({ message: "Invalid reset token type" });
+    // Check if OTP has expired
+    if (new Date() > new Date(otpRecord.expiresAt)) {
+      await otpRecord.destroy();
+      return res.status(400).json({ message: "OTP has expired. Please request a new one." });
     }
 
-    const seller = await Seller.findByPk(decoded.id);
+    // OTP is valid — find seller and update password
+    const seller = await Seller.findOne({ where: { email } });
     if (!seller) {
       return res.status(404).json({ message: "Seller not found" });
     }
 
     seller.Password = bcrypt.hashSync(newPassword, 10);
     await seller.save();
+
+    // Mark OTP as used
+    otpRecord.used = true;
+    await otpRecord.save();
 
     res.status(200).json({ message: "Password reset successfully. You can now login with your new password." });
   } catch (error) {

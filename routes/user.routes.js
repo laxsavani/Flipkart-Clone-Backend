@@ -6,7 +6,7 @@ const auth = require("../middleware/auth.middleware");
 router.post("/register", c.register);
 router.post("/login", c.login);
 router.post("/forgot-password", c.forgotPassword);
-router.post("/reset-password", c.resetPassword);
+router.post("/verify-otp-reset", c.verifyOtpAndReset);
 
 router.get('/get-products', auth, c.getProducts);
 router.get('/filter-products', auth, c.filterProducts);
