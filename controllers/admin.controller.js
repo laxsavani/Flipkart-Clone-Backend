@@ -1,6 +1,6 @@
 const { Admin, Category, Seller, User, Order } = require('../models');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const { generateAdminToken } = require('../utils/token');
 require('dotenv').config();
 
 exports.login = async (req, res) => {
@@ -17,11 +17,7 @@ exports.login = async (req, res) => {
             return res.status(401).json({ message: "Invalid Password" });
         }
 
-        const token = jwt.sign(
-            { id: admin.id, email: admin.email },
-            process.env.JWT_SECRET,
-            { expiresIn: "7d" }
-        );
+        const token = generateAdminToken(admin);
 
         res.status(200).json({
             message: "Admin Login successful",

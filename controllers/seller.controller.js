@@ -1,9 +1,9 @@
 require('dotenv').config();
 const { Seller, SubCategory, Product, Order, Otp } = require('../models');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const { registerMailForSeller, sendOtpMail } = require('../utils/mail');
 const cloudinary = require('../config/cloudinary');
+const { generateSellerToken } = require('../utils/token');
 
 exports.register = async (req, res) => {
     try {
@@ -34,11 +34,7 @@ exports.login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, seller.Password);
     if (!isMatch) return res.status(401).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign(
-      { id: seller.id, email: seller.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
+    const token = generateSellerToken({id: seller.id, email: seller.email})
 
     res.status(200).json({ message: "Seller Login successful", token });
   } catch (error) {
@@ -137,11 +133,9 @@ exports.updateProduct = async (req, res) => {
           console.error("Error deleting old images from Cloudinary:", err);
         }
       }
-      // Set new images
       product.images = JSON.stringify(req.files.map(file => file.path));
     }
 
-    // Update other fields
     product.name = name || product.name;
     product.description = description || product.description;
     product.price = price || product.price;
@@ -279,17 +273,13 @@ exports.forgotPassword = async (req, res) => {
       return res.status(404).json({ message: "No seller account found with this email" });
     }
 
-    // Generate 6-digit OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes from now
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); 
 
-    // Delete any existing unused OTPs for this email
     await Otp.destroy({ where: { email, type: 'seller', used: false } });
 
-    // Save new OTP in DB
     await Otp.create({ email, otp, type: 'seller', expiresAt });
 
-    // Send OTP via email
     await sendOtpMail(seller.name, seller.email, otp);
 
     res.status(200).json({
@@ -308,7 +298,6 @@ exports.verifyOtpAndReset = async (req, res) => {
       return res.status(400).json({ message: "Email, OTP, and new password are required" });
     }
 
-    // Find OTP record
     const otpRecord = await Otp.findOne({
       where: { email, otp, type: 'seller', used: false }
     });
@@ -317,13 +306,11 @@ exports.verifyOtpAndReset = async (req, res) => {
       return res.status(400).json({ message: "Invalid OTP. Please request a new one." });
     }
 
-    // Check if OTP has expired
     if (new Date() > new Date(otpRecord.expiresAt)) {
       await otpRecord.destroy();
       return res.status(400).json({ message: "OTP has expired. Please request a new one." });
     }
 
-    // OTP is valid — find seller and update password
     const seller = await Seller.findOne({ where: { email } });
     if (!seller) {
       return res.status(404).json({ message: "Seller not found" });
@@ -332,7 +319,6 @@ exports.verifyOtpAndReset = async (req, res) => {
     seller.Password = bcrypt.hashSync(newPassword, 10);
     await seller.save();
 
-    // Mark OTP as used
     otpRecord.used = true;
     await otpRecord.save();
 

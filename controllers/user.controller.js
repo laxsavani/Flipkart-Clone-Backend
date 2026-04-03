@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { User, Order, OrderItems, Product, Cart, CartItems, Otp } = require('../models');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const { generateUserToken } = require('../utils/token');
 const { sendOtpMail } = require('../utils/mail');
 
 exports.register = async (req, res) => {
@@ -31,11 +31,7 @@ exports.login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.Password);
     if (!isMatch) return res.status(401).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
+    const token = generateUserToken(user)
 
     res.status(200).json({ message: "User Login successful", token });
   } catch (error) {
@@ -302,17 +298,13 @@ exports.forgotPassword = async (req, res) => {
       return res.status(404).json({ message: "No user account found with this email" });
     }
 
-    // Generate 6-digit OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes from now
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); 
 
-    // Delete any existing unused OTPs for this email
     await Otp.destroy({ where: { email, type: 'user', used: false } });
 
-    // Save new OTP in DB
     await Otp.create({ email, otp, type: 'user', expiresAt });
 
-    // Send OTP via email
     await sendOtpMail(user.name, user.email, otp);
 
     res.status(200).json({
@@ -331,7 +323,6 @@ exports.verifyOtpAndReset = async (req, res) => {
       return res.status(400).json({ message: "Email, OTP, and new password are required" });
     }
 
-    // Find OTP record
     const otpRecord = await Otp.findOne({
       where: { email, otp, type: 'user', used: false }
     });
@@ -340,13 +331,11 @@ exports.verifyOtpAndReset = async (req, res) => {
       return res.status(400).json({ message: "Invalid OTP. Please request a new one." });
     }
 
-    // Check if OTP has expired
     if (new Date() > new Date(otpRecord.expiresAt)) {
       await otpRecord.destroy();
       return res.status(400).json({ message: "OTP has expired. Please request a new one." });
     }
 
-    // OTP is valid — find user and update password
     const user = await User.findOne({ where: { email } });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -355,7 +344,6 @@ exports.verifyOtpAndReset = async (req, res) => {
     user.Password = bcrypt.hashSync(newPassword, 10);
     await user.save();
 
-    // Mark OTP as used
     otpRecord.used = true;
     await otpRecord.save();
 
