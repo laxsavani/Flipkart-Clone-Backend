@@ -122,7 +122,7 @@ exports.updateProduct = async (req, res) => {
       if (req.files.length > 5) {
         return res.status(400).json({ message: "You can upload a maximum of 5 images" });
       }
-      // Delete old images from Cloudinary
+      
       if (product.images) {
         try {
           const oldImages = JSON.parse(product.images);
@@ -279,14 +279,12 @@ exports.forgotPassword = async (req, res) => {
       return res.status(404).json({ message: "No seller account found with this email" });
     }
 
-    // Generate a short-lived reset token (15 minutes)
     const resetToken = jwt.sign(
       { id: seller.id, email: seller.email, type: 'seller-reset' },
       process.env.JWT_SECRET,
       { expiresIn: '15m' }
     );
 
-    // Build reset link — replace with your actual frontend URL if available
     const resetLink = `${process.env.FRONTEND_URL || 'http://localhost:5000'}/seller/reset-password?token=${resetToken}`;
 
     await forgotPasswordMailForSeller(seller.name, seller.email, resetLink);
@@ -307,7 +305,6 @@ exports.resetPassword = async (req, res) => {
       return res.status(400).json({ message: "Token and new password are required" });
     }
 
-    // Verify the reset token
     let decoded;
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -315,7 +312,6 @@ exports.resetPassword = async (req, res) => {
       return res.status(401).json({ message: "Invalid or expired reset token" });
     }
 
-    // Ensure this token is specifically a seller password reset token
     if (decoded.type !== 'seller-reset') {
       return res.status(401).json({ message: "Invalid reset token type" });
     }
@@ -332,4 +328,4 @@ exports.resetPassword = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-};
+};

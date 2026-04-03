@@ -302,14 +302,12 @@ exports.forgotPassword = async (req, res) => {
       return res.status(404).json({ message: "No user account found with this email" });
     }
 
-    // Generate a short-lived reset token (15 minutes)
     const resetToken = jwt.sign(
       { id: user.id, email: user.email, type: 'user-reset' },
       process.env.JWT_SECRET,
       { expiresIn: '15m' }
     );
 
-    // Build reset link — replace with your actual frontend URL if available
     const resetLink = `${process.env.FRONTEND_URL || 'http://localhost:5000'}/user/reset-password?token=${resetToken}`;
 
     await forgotPasswordMailForUser(user.name, user.email, resetLink);
@@ -330,7 +328,6 @@ exports.resetPassword = async (req, res) => {
       return res.status(400).json({ message: "Token and new password are required" });
     }
 
-    // Verify the reset token
     let decoded;
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -338,7 +335,6 @@ exports.resetPassword = async (req, res) => {
       return res.status(401).json({ message: "Invalid or expired reset token" });
     }
 
-    // Ensure this token is specifically a user password reset token
     if (decoded.type !== 'user-reset') {
       return res.status(401).json({ message: "Invalid reset token type" });
     }
@@ -355,4 +351,4 @@ exports.resetPassword = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-};
+};
