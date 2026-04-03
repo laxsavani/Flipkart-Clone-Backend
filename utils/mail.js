@@ -483,66 +483,72 @@ exports.sendOtpMail = async (toName, toMail, otp) => {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>🔐 Password Reset OTP</title>
+    <title>✨ Your Password Reset OTP</title>
 </head>
-<body style="margin:0;padding:0;background-color:#f8fafc;padding:20px 10px;min-width:320px;font-family:'Segoe UI',Arial,sans-serif;">
+<body style="margin:0;padding:0;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 50%,#f0fdf4 100%);padding:25px 15px;min-width:320px;font-family:'Segoe UI',system-ui,Arial,sans-serif;">
     
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;max-width:500px;margin:0 auto;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;max-width:540px;margin:0 auto;">
         <tr>
             <td align="center">
                 
-                <!-- Simple Clean Card -->
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background:#ffffff;border-radius:16px;border:1px solid #e5e7eb;box-shadow:0 10px 30px rgba(0,0,0,0.1);">
+                <!-- Premium Glass Card -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background:linear-gradient(145deg,rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.85) 100%);backdrop-filter:blur(20px);border-radius:32px;border:1px solid rgba(255,255,255,0.6);box-shadow:0 30px 80px rgba(0,0,0,0.15),0 0 40px rgba(99,102,241,0.1),inset 0 1px 0 rgba(255,255,255,0.9);position:relative;overflow:hidden;">
+                    
+                    <!-- Subtle Glow -->
+                    <div style="position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(99,102,241,0.08) 0%,transparent 70%);opacity:0.5;"></div>
                     
                     <tr>
-                        <td align="center" style="padding:40px 25px;">
+                        <td align="center" style="padding:55px 35px 45px 35px;position:relative;">
                             
-                            <!-- Simple Icon -->
-                            <table border="0" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+                            <!-- Beautiful Hero Icon -->
+                            <table border="0" cellpadding="0" cellspacing="0" style="margin-bottom:30px;position:relative;">
                                 <tr>
-                                    <td align="center" style="background:#6366f1;width:70px;height:70px;border-radius:35px;color:#ffffff;font-size:32px;font-weight:bold;">
+                                    <td align="center" style="background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);width:90px;height:90px;border-radius:45px;color:#ffffff;font-size:40px;font-weight:800;box-shadow:0 20px 50px rgba(99,102,241,0.4),0 0 30px rgba(99,102,241,0.2),inset 0 1px 0 rgba(255,255,255,0.4);">
                                         🔐
                                     </td>
                                 </tr>
                             </table>
 
-                            <!-- Simple Title -->
-                            <h1 style="color:#111827;font-size:24px;font-weight:700;margin:0 0 10px 0;text-align:center;">
-                                Your Password Reset OTP
+                            <!-- Elegant Title -->
+                            <h1 style="color:#1e2937;font-size:28px;font-weight:800;margin:0 0 16px 0;text-align:center;line-height:1.3;background:linear-gradient(135deg,#1e2937,#374151);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+                                Your Magic Reset Code
                             </h1>
                             
-                            <!-- Greeting -->
-                            <p style="color:#6b7280;font-size:15px;margin:0 0 25px 0;text-align:center;line-height:1.5;">
-                                Hi <strong>${toName}</strong>,<br>use this code to reset your password.
+                            <!-- Warm Personal Greeting -->
+                            <p style="color:#475569;font-size:17px;margin:0 0 35px 0;text-align:center;line-height:1.7;max-width:90%;font-weight:400;">
+                                Hey <strong style="color:#1e2937;">${toName}</strong>! ✨<br>
+                                <span style="color:#6366f1;">Your 6-digit OTP</span> is ready to help you reset your password securely.
                             </p>
 
-                            <!-- OTP Display -->
-                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background:#f3f4f6;border-radius:12px;margin-bottom:20px;">
+                            <!-- Stunning OTP Display -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background:linear-gradient(135deg,#ffffff 0%,#fafbff 100%);border:2px solid #e0e7ff;border-radius:24px;margin-bottom:28px;box-shadow:0 15px 45px rgba(99,102,241,0.15),inset 0 1px 0 rgba(255,255,255,1),0 0 0 1px rgba(99,102,241,0.1);">
                                 <tr>
-                                    <td align="center" style="padding:25px 20px;">
-                                        <p style="color:#6b7280;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px 0;">Your OTP</p>
-                                        <p style="color:#111827;font-size:40px;font-weight:800;letter-spacing:12px;margin:0;font-family:'Courier New',monospace;">${otp}</p>
+                                    <td align="center" style="padding:40px 30px;">
+                                        <p style="color:#64748b;font-size:15px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0 0 20px 0;">Verification Code</p>
+                                        <p style="color:#1e2937;font-size:48px;font-weight:900;letter-spacing:20px;margin:0;font-family:'Courier New',monospace,serif;line-height:1.1;text-shadow:0 3px 12px rgba(0,0,0,0.1);background:linear-gradient(135deg,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">${otp}</p>
                                     </td>
                                 </tr>
                             </table>
 
-                            <!-- Expiry -->
-                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background:#fef3c7;border:1px solid #f59e0b;border-radius:8px;margin-bottom:15px;">
+                            <!-- Elegant Expiry Notice -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background:linear-gradient(135deg,#fef7ff,#fdf2f8);border:1px solid #f3e8ff;border-radius:16px;margin-bottom:22px;box-shadow:0 6px 20px rgba(168,85,247,0.15);">
                                 <tr>
-                                    <td style="padding:12px 16px;text-align:center;">
-                                        <p style="color:#92400e;font-size:14px;font-weight:600;margin:0;">
-                                            ⏱️ Expires in <strong>10 minutes</strong>
+                                    <td style="padding:18px 24px;text-align:center;">
+                                        <p style="color:#7c3aed;font-size:16px;font-weight:700;margin:0;line-height:1.4;">
+                                            <span style="color:#a855f7;font-size:20px;margin-right:10px;">⏰</span>
+                                            <strong>Valid for 10 minutes</strong>
                                         </p>
                                     </td>
                                 </tr>
                             </table>
 
-                            <!-- Security -->
-                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background:#f0fdf4;border:1px solid #10b981;border-radius:8px;">
+                            <!-- Beautiful Security Card -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background:linear-gradient(135deg,#f0fdf4,#ecfdf5);border:1px solid #bbf7d0;border-radius:16px;box-shadow:0 6px 20px rgba(16,185,129,0.15);">
                                 <tr>
-                                    <td style="padding:12px 16px;text-align:center;">
-                                        <p style="color:#166534;font-size:13px;margin:0;">
-                                            ✅ <strong>Didn't request?</strong> Ignore safely.
+                                    <td style="padding:18px 24px;text-align:center;">
+                                        <p style="color:#166534;font-size:15px;margin:0;line-height:1.6;font-weight:500;">
+                                            <span style="color:#10b981;font-size:20px;margin-right:10px;">✅</span>
+                                            <strong style="color:#14532d;">Not expecting this?</strong> Your account is safe - just ignore.
                                         </p>
                                     </td>
                                 </tr>
@@ -551,15 +557,34 @@ exports.sendOtpMail = async (toName, toMail, otp) => {
                         </td>
                     </tr>
                     
-                    <!-- Simple Footer -->
+                    <!-- Premium Footer -->
                     <tr>
-                        <td style="background:#f9fafb;padding:20px 25px;border-top:1px solid #e5e7eb;text-align:center;">
-                            <p style="color:#6b7280;font-size:13px;margin:0;">
-                                <strong style="color:#6366f1;">MarketPro</strong> - Automated email
+                        <td style="background:linear-gradient(135deg,#f8fafc,#f1f5f9);padding:30px 35px;border-top:1px solid #e5e7eb;text-align:center;position:relative;">
+                            <div style="position:absolute;top:15px;right:20px;opacity:0.3;font-size:24px;">✨</div>
+                            <p style="color:#6b7280;font-size:15px;margin:0 0 6px 0;line-height:1.4;font-weight:600;">
+                                <strong style="color:#6366f1;">MarketPro</strong>
+                            </p>
+                            <p style="color:#9ca3af;font-size:14px;margin:0;line-height:1.4;">
+                                Made with ❤️ for you • Automated message
                             </p>
                         </td>
                     </tr>
                     
+                </table>
+
+                <!-- Helpful Support -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:520px;margin-top:30px;">
+                    <tr>
+                        <td align="center" style="padding:25px 25px;color:#475569;font-size:15px;line-height:1.6;background:#ffffff;border-radius:20px;border:1px solid #e5e7eb;box-shadow:0 12px 35px rgba(0,0,0,0.08);">
+                            <p style="margin:0 0 8px 0;font-weight:600;font-size:16px;">
+                                <span style="color:#6366f1;font-size:20px;margin-right:10px;">💡</span>
+                                Need help entering the code?
+                            </p>
+                            <p style="margin:0;font-size:14px;">
+                                <strong style="color:#1e2937;">support@marketpro.com</strong>
+                            </p>
+                        </td>
+                    </tr>
                 </table>
 
             </td>
