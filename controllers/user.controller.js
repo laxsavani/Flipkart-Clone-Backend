@@ -315,7 +315,34 @@ exports.forgotPassword = async (req, res) => {
   }
 };
 
-exports.verifyOtpAndReset = async (req, res) => {
+exports.verifyOtp = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    if (!email || !otp) {
+      return res.status(400).json({ message: "Email and OTP are required" });
+    }
+
+    const otpRecord = await Otp.findOne({
+      where: { email, otp, type: 'user', used: false }
+    });
+
+    if (!otpRecord) {
+      return res.status(400).json({ message: "Invalid OTP. Please request a new one." });
+    }
+
+    if (new Date() > new Date(otpRecord.expiresAt)) {
+      await otpRecord.destroy();
+      return res.status(400).json({ message: "OTP has expired. Please request a new one." });
+    }
+
+    res.status(200).json({ message: "OTP verified successfully. You can now reset your password." });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.resetPassword = async (req, res) => {
   try {
     const { email, otp, newPassword } = req.body;
 
@@ -328,7 +355,7 @@ exports.verifyOtpAndReset = async (req, res) => {
     });
 
     if (!otpRecord) {
-      return res.status(400).json({ message: "Invalid OTP. Please request a new one." });
+      return res.status(400).json({ message: "Invalid OTP or request expired." });
     }
 
     if (new Date() > new Date(otpRecord.expiresAt)) {
