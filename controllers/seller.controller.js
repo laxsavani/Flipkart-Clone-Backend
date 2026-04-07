@@ -274,11 +274,18 @@ exports.forgotPassword = async (req, res) => {
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); 
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
-    await Otp.destroy({ where: { email, type: 'seller', used: false } });
+    const existingOtp = await Otp.findOne({ where: { email, type: 'seller' } });
 
-    await Otp.create({ email, otp, type: 'seller', expiresAt });
+    if (existingOtp) {
+      existingOtp.otp = otp;
+      existingOtp.expiresAt = expiresAt;
+      existingOtp.used = false;
+      await existingOtp.save();
+    } else {
+      await Otp.create({ email, otp, type: 'seller', expiresAt });
+    }
 
     await sendOtpMail(seller.name, seller.email, otp);
 
