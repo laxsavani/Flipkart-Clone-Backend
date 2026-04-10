@@ -334,6 +334,14 @@ exports.resetPassword = async (req, res) => {
     if (newPassword !== conformPassword) {
       return res.status(400).json({ message: "New password and confirm password do not match" });
     }
+    
+    const seller = await Seller.findOne({ where: { email } });
+    if (!seller) {
+      return res.status(404).json({ message: "Seller not found" });
+    }
+    const isMatch = await bcrypt.compare(newPassword, seller.Password);
+    if (isMatch) return res.status(401).json({ message: "New password cannot be same as old password" });
+
     const otpRecord = await Otp.findOne({
       where: { email, otp, type: 'seller', used: false }
     });
@@ -345,11 +353,6 @@ exports.resetPassword = async (req, res) => {
     if (new Date() > new Date(otpRecord.expiresAt)) {
       await otpRecord.destroy();
       return res.status(400).json({ message: "OTP has expired. Please request a new one." });
-    }
-
-    const seller = await Seller.findOne({ where: { email } });
-    if (!seller) {
-      return res.status(404).json({ message: "Seller not found" });
     }
 
     seller.Password = bcrypt.hashSync(newPassword, 10);
