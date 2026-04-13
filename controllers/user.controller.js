@@ -363,11 +363,23 @@ exports.verifyOtp = async (req, res) => {
 
 exports.resetPassword = async (req, res) => {
   try {
-    const { email, otp, newPassword } = req.body;
+    const { email, otp, newPassword, conformPassword } = req.body;
 
-    if (!email || !otp || !newPassword) {
+    if (!email || !otp || !newPassword || !conformPassword) {
       return res.status(400).json({ message: "Email, OTP, and new password are required" });
     }
+
+    if (newPassword !== conformPassword) {
+      return res.status(400).json({ message: "New password and confirm password do not match" });
+    }
+
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const isMatch = await bcrypt.compare(newPassword, user.Password);
+    if (isMatch) return res.status(401).json({ message: "New password cannot be same as old password" });
 
     const otpRecord = await Otp.findOne({
       where: { email, otp, type: 'user', used: false }
@@ -380,11 +392,6 @@ exports.resetPassword = async (req, res) => {
     if (new Date() > new Date(otpRecord.expiresAt)) {
       await otpRecord.destroy();
       return res.status(400).json({ message: "OTP has expired. Please request a new one." });
-    }
-
-    const user = await User.findOne({ where: { email } });
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
     }
 
     user.Password = bcrypt.hashSync(newPassword, 10);
