@@ -53,30 +53,36 @@ exports.getProducts = async (req, res) => {
 
 exports.filterProducts = async (req, res) => {
   try {
-    const { categoryId, subCategoryId } = req.query;
-    if(categoryId && !subCategoryId){
-      const products = await Product.findAll({ where: { categoryId } });
-      if (!products) {
-        return res.status(404).json({ message: "Product's Category not found" });
-      }
-      res.status(200).json({ message: "Products fetched successfully By Category", products });
+    const { subCategoryId } = req.query;
+
+    let whereCondition = {};
+
+    if (subCategoryId) {
+      whereCondition.subCategory_id = subCategoryId;
     }
-    else if(subCategoryId && !categoryId){
-      const products = await Product.findAll({ where: { subCategoryId } });
-      if (!products) {
-        return res.status(404).json({ message: "Product's SubCategory not found" });
-      }
-      res.status(200).json({ message: "Products fetched successfully By SubCategory", products });
+
+    const products = await Product.findAll({
+      where: whereCondition
+    });
+
+    if (products.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No products found"
+      });
     }
-    else{
-      const products = await Product.findAll({ where: { categoryId, subCategoryId } });
-      if (!products) {
-        return res.status(404).json({ message: "Products not found" });
-      }
-      res.status(200).json({ message: "Products fetched successfully", products });
-      }
-    } catch (error) {
-      res.status(500).json({ message: error.message });
+
+    res.status(200).json({
+      success: true,
+      count: products.length,
+      products
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
   }
 };
 
@@ -88,6 +94,12 @@ exports.addToCart = async (req, res) => {
     if (!Array.isArray(items) || items.length === 0) {
       return res.status(400).json({
         success: false,
+/**
+ * Add a product to the user's cart.
+ * @param {Object} req - Request object.
+ * @param {Object} res - Response object.
+ * @returns {Promise} - Promise that resolves to a JSON response.
+ */
         message: "Items array is required"
       });
     }
