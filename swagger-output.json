@@ -21,6 +21,9 @@
   "paths": {
     "/register": {
       "post": {
+        "tags": [
+          "User APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -57,6 +60,9 @@
     },
     "/login": {
       "post": {
+        "tags": [
+          "User APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -82,9 +88,6 @@
           "401": {
             "description": "Unauthorized"
           },
-          "404": {
-            "description": "Not Found"
-          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -93,6 +96,9 @@
     },
     "/forgot-password": {
       "post": {
+        "tags": [
+          "User APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -126,6 +132,9 @@
     },
     "/verify-otp": {
       "post": {
+        "tags": [
+          "User APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -159,6 +168,9 @@
     },
     "/reset-password": {
       "post": {
+        "tags": [
+          "User APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -204,6 +216,9 @@
     },
     "/get-products": {
       "get": {
+        "tags": [
+          "User APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -230,6 +245,9 @@
     },
     "/filter-products": {
       "get": {
+        "tags": [
+          "User APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -261,6 +279,9 @@
     },
     "/add-to-cart": {
       "post": {
+        "tags": [
+          "User APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -299,6 +320,9 @@
     },
     "/get-cart/{id}": {
       "get": {
+        "tags": [
+          "User APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -331,6 +355,9 @@
     },
     "/remove-from-cart/{id}": {
       "delete": {
+        "tags": [
+          "User APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -363,6 +390,9 @@
     },
     "/place-order": {
       "post": {
+        "tags": [
+          "User APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -404,6 +434,9 @@
     },
     "/get-order": {
       "get": {
+        "tags": [
+          "User APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -430,6 +463,9 @@
     },
     "/order-tracking/{id}": {
       "get": {
+        "tags": [
+          "User APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -462,6 +498,9 @@
     },
     "/cancel-order/{id}": {
       "post": {
+        "tags": [
+          "User APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -494,6 +533,9 @@
     },
     "/seller/register": {
       "post": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -530,6 +572,9 @@
     },
     "/seller/login": {
       "post": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -563,6 +608,9 @@
     },
     "/seller/forgot-password": {
       "post": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -596,6 +644,9 @@
     },
     "/seller/verify-otp": {
       "post": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -629,6 +680,9 @@
     },
     "/seller/reset-password": {
       "post": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -674,6 +728,9 @@
     },
     "/seller/add-sub-category": {
       "post": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -715,6 +772,9 @@
     },
     "/seller/delete-sub-category/{id}": {
       "delete": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -747,6 +807,9 @@
     },
     "/seller/restore-sub-category/{id}": {
       "post": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -779,6 +842,9 @@
     },
     "/seller/add-product": {
       "post": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -832,6 +898,9 @@
     },
     "/seller/upadte-product/{id}": {
       "put": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -900,6 +969,9 @@
     },
     "/seller/get-product/{id}": {
       "get": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -932,6 +1004,9 @@
     },
     "/seller/get-product": {
       "get": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -958,6 +1033,9 @@
     },
     "/seller/delete-product/{id}": {
       "delete": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -990,6 +1068,9 @@
     },
     "/seller/restore-product/{id}": {
       "post": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1022,6 +1103,9 @@
     },
     "/seller/get-orders": {
       "get": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1048,6 +1132,9 @@
     },
     "/seller/filter-order/{status}": {
       "get": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1080,6 +1167,9 @@
     },
     "/seller/update-order-status/{id}": {
       "put": {
+        "tags": [
+          "Seller APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1124,6 +1214,9 @@
     },
     "/admin/login": {
       "post": {
+        "tags": [
+          "Admin APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1160,6 +1253,9 @@
     },
     "/admin/category": {
       "post": {
+        "tags": [
+          "Admin APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1199,6 +1295,9 @@
         }
       },
       "get": {
+        "tags": [
+          "Admin APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1225,6 +1324,9 @@
     },
     "/admin/get-sellers": {
       "get": {
+        "tags": [
+          "Admin APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1251,6 +1353,9 @@
     },
     "/admin/get-users": {
       "get": {
+        "tags": [
+          "Admin APIs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1277,599 +1382,9 @@
     },
     "/admin/total-sales": {
       "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
+        "tags": [
+          "Admin APIs"
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/add-sub-category": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "category_id": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/delete-sub-category/{id}": {
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/restore-sub-category/{id}": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/add-product": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
-                "price": {
-                  "example": "any"
-                },
-                "mrp": {
-                  "example": "any"
-                },
-                "stock": {
-                  "example": "any"
-                },
-                "subCategory_id": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/upadte-product/{id}": {
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
-                "price": {
-                  "example": "any"
-                },
-                "mrp": {
-                  "example": "any"
-                },
-                "stock": {
-                  "example": "any"
-                },
-                "seller_id": {
-                  "example": "any"
-                },
-                "category_id": {
-                  "example": "any"
-                },
-                "subCategory_id": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/get-product/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/get-product": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/delete-product/{id}": {
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/restore-product/{id}": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/get-orders": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/filter-order/{status}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "status",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/update-order-status/{id}": {
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/category": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "409": {
-            "description": "Conflict"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/get-sellers": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/get-users": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/total-sales": {
-      "get": {
         "description": "",
         "parameters": [
           {

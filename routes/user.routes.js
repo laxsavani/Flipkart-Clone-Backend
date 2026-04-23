@@ -3,6 +3,11 @@ const router = express.Router();
 const c = require("../controllers/user.controller");
 const auth = require("../middleware/auth.middleware");
 
+router.use((req, res, next) => {
+    // #swagger.tags = ['User APIs']
+    next();
+});
+
 router.post("/register", c.register);
 router.post("/login", c.login);
 router.post("/forgot-password", c.forgotPassword);

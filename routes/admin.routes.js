@@ -3,6 +3,11 @@ const routes = require('express').Router();
 const c = require('../controllers/admin.controller');
 const auth = require('../middleware/auth.middleware');
 
+routes.use((req, res, next) => {
+    // #swagger.tags = ['Admin APIs']
+    next();
+});
+
 routes.post('/login', c.login);
 
 routes.post('/category', auth, c.addCategory);

@@ -4,6 +4,11 @@ const c = require("../controllers/seller.controller");
 const auth = require("../middleware/auth.middleware");
 const upload = require("../middleware/upload.middleware");
 
+router.use((req, res, next) => {
+    // #swagger.tags = ['Seller APIs']
+    next();
+});
+
 router.post("/register", c.register);
 router.post("/login", c.login);
 router.post("/forgot-password", c.forgotPassword);
