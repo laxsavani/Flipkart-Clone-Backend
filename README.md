@@ -1,3 +1,14 @@
+## .env file content
+PORT=5000
+JWT_SECRET=
+EMAIL_USER=
+EMAIL_PASS=
+CLOUD_NAME=
+API_KEY=
+API_SECRET=
+
+
+
 npm init -y 
 npm express mysql2 sequelize sequelize-cli
 npx sequelize-cli init
